@@ -175,15 +175,15 @@ export const getGuideArray = (max, height, numberOfPoints = 5) => {
     x = Math.round(x * 10)
     temp = 1
   } else if (x >= 1000 && x < 1000000) {
-    postfix = 'K'
+    postfix = '千'
     x = Math.round(x / 100)
     temp = 1000
   } else if (x >= 1000000 && x < 1000000000) {
-    postfix = 'M'
+    postfix = '百万'
     x = Math.round(x / 100000)
     temp = 1000000
   } else {
-    postfix = 'B'
+    postfix = '亿'
     x = Math.round(x / 100000000)
     temp = 1000000000
   }
@@ -312,7 +312,7 @@ export const drawXAxis = (color = '#e0e0e0') => {
     }} />
   )
 }
-export const drawXAxisLabels = (sortedData, gap, color = '#000000') => {
+export const drawXAxisLabels = (sortedData, gap, color = '#000000',odd = true) => {
   return (
     <View style={{
       width: '100%',
@@ -320,8 +320,29 @@ export const drawXAxisLabels = (sortedData, gap, color = '#000000') => {
       height: 10
     }}>
       {sortedData.map((data, i) => {
-        // if (data[3] && i % 2 === 1) {
-        if (data['x'] && i % 2 === 1) {
+        if(odd){
+          // if (data[3] && i % 2 === 1) {
+            if (data['x'] && i % 2 === 1) {
+              return (
+                <View key={'label' + i} style={{
+                  position: 'absolute',
+                  // left: data[0] - gap / 2,
+                  left: data['gap'] - gap / 2,
+                  width: gap,
+                  alignItems: 'center'
+                }}>
+                  <Text style={{fontSize: 9, color: color}}>
+                    {
+                      // data[3]
+                      data['x']
+                    }
+                  </Text>
+                </View>
+              )
+            } else {
+              return null
+            }
+        }else{
           return (
             <View key={'label' + i} style={{
               position: 'absolute',
@@ -338,9 +359,8 @@ export const drawXAxisLabels = (sortedData, gap, color = '#000000') => {
               </Text>
             </View>
           )
-        } else {
-          return null
         }
+       
       })}
     </View>
   )
