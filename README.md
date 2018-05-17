@@ -1,3 +1,5 @@
+yarn link react-native-pure-chart
+
 # React Native Pure Chart
 [![NPM Version](https://img.shields.io/npm/v/react-native-pure-chart.svg?style=flat)](https://www.npmjs.org/package/react-native-pure-chart)
 [![npm](https://img.shields.io/npm/dm/react-native-pure-chart.svg?style=flat)](https://www.npmjs.org/package/react-native-pure-chart)
